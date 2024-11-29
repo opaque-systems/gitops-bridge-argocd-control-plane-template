@@ -14,7 +14,7 @@ spec:
               values:
                 addonChart: cert-manager
                 # anything not staging or prod use this version
-                addonChartVersion: v1.14.3
+                addonChartVersion: v1.14.5
                 addonChartRepository: https://charts.jetstack.io
               selector:
                 matchExpressions:
@@ -26,18 +26,18 @@ spec:
                     values: ['true']
                   - key: aws_cluster_name
                     operator: DoesNotExist
-          - clusters:
-              selector:
-                matchLabels:
-                  environment: staging
-              values:
-                addonChartVersion: v1.14.3
-          - clusters:
-              selector:
-                matchLabels:
-                  environment: prod
-              values:
-                addonChartVersion: v1.14.3
+          # - clusters:
+          #     selector:
+          #       matchLabels:
+          #         environment: staging
+          #     values:
+          #       addonChartVersion: v1.14.5
+          # - clusters:
+          #     selector:
+          #       matchLabels:
+          #         environment: prod
+          #     values:
+          #       addonChartVersion: v1.14.3
   template:
     metadata:
       name: addon-{{name}}-{{values.addonChart}}
