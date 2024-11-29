@@ -66,7 +66,7 @@ spec:
           # values
           # valuesObject
       destination:
-        namespace: '{{metadata.annotations.cert_manager_namespace}}'
+        namespace: '{{values.addonChart}}'
         name: '{{name}}'
       syncPolicy:
         automated: {}
