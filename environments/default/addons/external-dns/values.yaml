@@ -1,12 +1,10 @@
 ---
 provider:
   name: cloudflare
-
 interval: 10m
 logLevel: debug
 policy: sync
-provider: cloudflare
-txtOwnerId: ${cluster_name}
+txtOwnerId: {{.metadata.annotations.cluster_name}}
 sources:
   - service
   - ingress
@@ -19,3 +17,4 @@ env:
       secretKeyRef:
         name: cloudflare-api-token
         key: api-token# Helm chart values
+
