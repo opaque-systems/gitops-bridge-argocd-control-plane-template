@@ -2,7 +2,6 @@ provider: cloudflare
 interval: 10m
 logLevel: debug
 policy: sync
-txtOwnerId: {{.metadata.annotations.cluster_name}}
 sources:
   - service
   - ingress
