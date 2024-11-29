@@ -1,4 +1,3 @@
----
 provider:
   name: cloudflare
 interval: 10m
