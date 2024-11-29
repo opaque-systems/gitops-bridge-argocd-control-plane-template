@@ -55,8 +55,8 @@ spec:
               - $values/{{metadata.annotations.addons_repo_basepath}}environments/default/addons/{{values.addonChart}}/values.yaml
               - $values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/values.yaml
               - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/values.yaml
-            values: |
-              txtOwnerId: {{metadata.annotations.cluster_name}}
+            # values: |
+            #   txtOwnerId: {{metadata.annotations.cluster_name}}
       destination:
         namespace: '{{values.addonChart}}'
         name: '{{name}}'
