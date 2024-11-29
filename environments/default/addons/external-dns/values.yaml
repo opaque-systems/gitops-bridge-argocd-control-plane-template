@@ -16,5 +16,5 @@ env:
     valueFrom:
       secretKeyRef:
         name: cloudflare-api-token
-        key: api-token# Helm chart values
+        key: api-token
 
