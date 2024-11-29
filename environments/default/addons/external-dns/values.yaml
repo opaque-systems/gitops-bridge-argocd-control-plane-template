@@ -8,6 +8,7 @@ sources:
   - crd
 extraArgs:
   - "--cloudflare-dns-records-per-page=1000"
+  - "--domain-filter=opaque-int.com"
 env:
   - name: CF_API_TOKEN
     valueFrom:
