@@ -1,1 +1,21 @@
-# Helm chart values
+---
+provider:
+  name: cloudflare
+
+interval: 10m
+logLevel: debug
+policy: sync
+provider: cloudflare
+txtOwnerId: ${cluster_name}
+sources:
+  - service
+  - ingress
+  - crd
+extraArgs:
+  - "--cloudflare-dns-records-per-page=1000"
+env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare-api-token
+        key: api-token# Helm chart values
