@@ -1,7 +1,7 @@
----
-installCRDs: true
-extraArgs:
-  - --dns01-check-retry-period=90s
-  - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
-  - --dns01-recursive-nameservers-only
-  - --max-concurrent-challenges=10
+# ---
+# installCRDs: true
+# extraArgs:
+#   - --dns01-check-retry-period=90s
+#   - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
+#   - --dns01-recursive-nameservers-only
+#   - --max-concurrent-challenges=10
