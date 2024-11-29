@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: addons-cloudflare-external-dns
+  name: addons-external-dns
 spec:
   syncPolicy:
     preserveResourcesOnDeletion: true
@@ -12,7 +12,7 @@ spec:
         generators:
           - clusters:
               values:
-                addonChart: cloudflare-external-dns
+                addonChart: external-dns
                 addonChartVersion: 1.14.5
                 addonChartRepositoryNamespace: external-dns
                 addonChartRepository: https://kubernetes-sigs.github.io/external-dns
@@ -21,7 +21,7 @@ spec:
                   - key: akuity.io/argo-cd-cluster-name
                     operator: NotIn
                     values: [in-cluster]
-                  - key: enable_cloudflare_external_dns
+                  - key: enable_external_dns
                     operator: In
                     values: ['true']
   template:
