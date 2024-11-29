@@ -29,16 +29,16 @@ spec:
                 matchLabels:
                   environment: staging
               values:
-                addonChartVersion: 1.14.3
+                addonChartVersion: 1.14.5
           - clusters:
               selector:
                 matchLabels:
                   environment: prod
               values:
-                addonChartVersion: 1.14.3
+                addonChartVersion: 1.14.5
   template:
     metadata:
-      name: 'addon-{{name}}-{{values.addonChart}}'
+      name: addon-{{name}}-{{values.addonChart}}
     spec:
       project: default
       sources:

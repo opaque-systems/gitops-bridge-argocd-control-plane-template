@@ -1,5 +1,4 @@
-provider:
-  name: cloudflare
+provider: cloudflare
 interval: 10m
 logLevel: debug
 policy: sync

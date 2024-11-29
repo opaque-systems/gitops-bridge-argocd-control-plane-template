@@ -13,7 +13,6 @@ spec:
           - clusters:
               values:
                 addonChart: keda
-                # anything not staging or prod use this version
                 addonChartVersion: 2.14.2
                 addonChartRepository: https://kedacore.github.io/charts
               selector:
