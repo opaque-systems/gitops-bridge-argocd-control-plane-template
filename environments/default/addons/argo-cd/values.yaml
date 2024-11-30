@@ -53,17 +53,11 @@ server:
   service:
     type: LoadBalancer
     annotations:
-      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
-      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      external-dns.alpha.kubernetes.io/target: edge-int.{{metadata.annotations.dns_domain}}
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 
 configs:
   repositories:
-    # Required when using helm repository with oci formal like karpenter and aws-gateway-api-controller
-    aws-public-ecr:
-      name: aws-public-ecr
-      type: helm
-      url: public.ecr.aws
-      enableOCI: 'true'
   cm:
     application.resourceTrackingMethod: 'annotation' #use annotation for tracking required for Crossplane
     resource.exclusions: |
@@ -71,124 +65,6 @@ configs:
         - ProviderConfigUsage
         apiGroups:
         - "*"
-    resource.customizations: |
-      "awsblueprints.io/*":
-        health.lua: |
-          health_status = {
-            status = "Progressing",
-            message = "Provisioning ..."
-          }
-
-          if obj.status == nil or obj.status.conditions == nil then
-            return health_status
-          end
-
-          for i, condition in ipairs(obj.status.conditions) do
-            if condition.type == "Ready" then
-              if condition.status == "True" then
-                health_status.status = "Healthy"
-                health_status.message = "Resource is up-to-date."
-                return health_status
-              end
-            end
-
-            if condition.type == "LastAsyncOperation" then
-              if condition.status == "False" then
-                health_status.status = "Degraded"
-                health_status.message = condition.message
-                return health_status
-              end
-            end
-
-            if condition.type == "Synced" then
-              if condition.status == "False" then
-                health_status.status = "Degraded"
-                health_status.message = condition.message
-                return health_status
-              end
-            end
-          end
-
-          return health_status
-
-      "*.aws.upbound.io/*":
-        health.lua: |
-          health_status = {
-            status = "Progressing",
-            message = "Provisioning ..."
-          }
-
-          if obj.status == nil or obj.status.conditions == nil then
-            return health_status
-          end
-
-          for i, condition in ipairs(obj.status.conditions) do
-            if condition.type == "Ready" then
-              if condition.status == "True" then
-                health_status.status = "Healthy"
-                health_status.message = "Resource is up-to-date."
-                return health_status
-              end
-            end
-
-            if condition.type == "LastAsyncOperation" then
-              if condition.status == "False" then
-                health_status.status = "Degraded"
-                health_status.message = condition.message
-                return health_status
-              end
-            end
-
-            if condition.type == "Synced" then
-              if condition.status == "False" then
-                health_status.status = "Degraded"
-                health_status.message = condition.message
-                return health_status
-              end
-            end
-          end
-
-          return health_status
-
-      "*.aws.crossplane.io/*":
-        health.lua: |
-          health_status = {
-            status = "Progressing",
-            message = "Provisioning ..."
-          }
-
-          if obj.status == nil or obj.status.conditions == nil then
-            return health_status
-          end
-
-          for i, condition in ipairs(obj.status.conditions) do
-            if condition.type == "Ready" then
-              if condition.status == "True" then
-                health_status.status = "Healthy"
-                health_status.message = "Resource is up-to-date."
-                return health_status
-              end
-            end
-
-            if condition.type == "LastAsyncOperation" then
-              if condition.status == "False" then
-                health_status.status = "Degraded"
-                health_status.message = condition.message
-                return health_status
-              end
-            end
-
-            if condition.type == "Synced" then
-              if condition.status == "False" then
-                health_status.status = "Degraded"
-                health_status.message = condition.message
-                return health_status
-              end
-            end
-          end
-
-          return health_status
-
 
 # -- Array of extra K8s manifests to deploy
 ## Note: Supports use of custom Helm templates
