@@ -56,10 +56,10 @@ spec:
               - $values/{{metadata.annotations.addons_repo_basepath}}environments/{{metadata.labels.environment}}/addons/{{values.addonChart}}/values.yaml
               - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/values.yaml
             values: |
-              domainName: "{{metadata.annotation.dns_domain}}"
+              domainName: "{{metadata.annotations.dns_domain}}"
               clusterIssuer: "opaque-cert-manager-zerossl"
-              zerosslKeyId: "foo"
-              email: "{{metadata.annotation.letsencrypt_email_address}}"
+              zerosslKeyId: "{{metadata.annotations.zerossl_key_id}}"
+              email: "{{metadata.annotations.letsencrypt_email_address}}"
       destination:
         namespace: '{{values.addonChart}}'
         name: '{{name}}'
