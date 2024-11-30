@@ -57,6 +57,24 @@ spec:
               - $values/{{metadata.annotations.addons_repo_basepath}}clusters/{{name}}/addons/{{values.addonChart}}/values.yaml
             values: |
               txtOwnerId: {{metadata.annotations.cluster_name}}
+              provider: cloudflare
+              interval: 10m
+              logLevel: debug
+              policy: sync
+              sources:
+                - service
+                - ingress
+                - crd
+              extraArgs:
+                - "--cloudflare-dns-records-per-page=1000"
+                - "--domain-filter=opaque-int.com"
+              env:
+                - name: CF_API_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: cloudflare-api-token
+                      key: api-token
+
       destination:
         namespace: '{{values.addonChart}}'
         name: '{{name}}'
