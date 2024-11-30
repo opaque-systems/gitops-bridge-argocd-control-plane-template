@@ -81,7 +81,7 @@ spec:
                   mountPath: /etc/kubernetes
                   readOnly: true
       destination:
-        namespace: '{{values.addonChart}}'
+        namespace: 'external-dns'
         name: '{{name}}'
       syncPolicy:
         automated: {}
