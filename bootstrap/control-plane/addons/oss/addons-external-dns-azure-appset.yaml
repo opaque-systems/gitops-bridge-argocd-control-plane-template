@@ -80,11 +80,11 @@ spec:
                 - name: azure-config-file
                   mountPath: /etc/kubernetes
                   readOnly: true
-          destination:
-            namespace: '{{values.addonChart}}'
-            name: '{{name}}'
-          syncPolicy:
-            automated: {}
-            syncOptions:
-              - CreateNamespace=true
-              - ServerSideApply=true # Big CRDs.
+      destination:
+        namespace: '{{values.addonChart}}'
+        name: '{{name}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true # Big CRDs.

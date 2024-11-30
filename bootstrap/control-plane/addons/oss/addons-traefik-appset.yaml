@@ -143,10 +143,11 @@ spec:
                   external-dns.alpha.kubernetes.io/hostname: edge-int.{{metadata.annotations.traefik_dns_domain}}
                   service.beta.kubernetes.io/azure-load-balancer-internal: "{{metadata.annotations.traefik_internal}}"
                   service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "{{metadata.annotations.traefik_subnet_name}}"
-            namespace: '{{values.addonChart}}'
-            name: '{{name}}'
-          syncPolicy:
-            automated: {}
-            syncOptions:
-              - CreateNamespace=true
-              - ServerSideApply=true # Big CRDs.
+      destination:
+        namespace: '{{values.addonChart}}'
+        name: '{{name}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true # Big CRDs.
