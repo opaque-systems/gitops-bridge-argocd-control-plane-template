@@ -38,7 +38,7 @@ spec:
                 addonChartVersion: 1.14.5
   template:
     metadata:
-      name: addon-{{name}}-{{values.addonChart}}
+      name: addon-{{name}}-{{values.addonChart}}-azure
     spec:
       project: default
       sources:
@@ -49,7 +49,7 @@ spec:
           repoURL: '{{values.addonChartRepository}}'
           targetRevision: '{{values.addonChartVersion}}'
           helm:
-            releaseName: '{{values.addonChart}}'
+            releaseName: '{{values.addonChart}}-azure'
             ignoreMissingValueFiles: true
             valueFiles:
               - $values/{{metadata.annotations.addons_repo_basepath}}environments/default/addons/{{values.addonChart}}/values.yaml
