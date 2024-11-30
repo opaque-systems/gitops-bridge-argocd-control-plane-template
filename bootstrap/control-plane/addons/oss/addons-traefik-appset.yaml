@@ -144,7 +144,7 @@ spec:
                   service.beta.kubernetes.io/azure-load-balancer-internal: "{{metadata.annotations.traefik_internal}}"
                   service.beta.kubernetes.io/azure-load-balancer-internal-subnet: "{{metadata.annotations.traefik_subnet_name}}"
       destination:
-        namespace: '{{values.addonChart}}'
+        namespace: 'kube-system'
         name: '{{name}}'
       syncPolicy:
         automated: {}
