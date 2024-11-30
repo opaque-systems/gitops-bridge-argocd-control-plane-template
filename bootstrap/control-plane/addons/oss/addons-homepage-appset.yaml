@@ -12,16 +12,16 @@ spec:
         generators:
           - clusters:
               values:
-                addonChart: homepage
+                addonChart: opaque-homepage
                 # anything not staging or prod use this version
-                addonChartVersion: 1.14.5
-                addonChartRepository: oci://ghcr.io/opaque-systems/helm-charts
+                addonChartVersion: 0.1.5
+                addonChartRepository: ghcr.io/opaque-systems/helm-charts
               selector:
                 matchExpressions:
                   - key: akuity.io/argo-cd-cluster-name
                     operator: NotIn
                     values: [in-cluster]
-                  - key: enable_homepage
+                  - key: enable_opaque_homepage
                     operator: In
                     values: ['true']
           - clusters:
@@ -62,7 +62,7 @@ spec:
               controlPlaneDomainName: {{metadata.annotations.resource_group_name}}.controlplane.opaque-int.com
               dataPlaneDomainName: {{metadata.annotations.resource_group_name}}.dataplane.opaque-int.com
               clusterIssuer: opaque-cert-manager
-              email: infrastructure@opaque.co
+              email: {{metadata.annotations.letsencrypt_email_address}}
               homepage:
                 config:
                   useExistingConfigMap: opaque-homepage
