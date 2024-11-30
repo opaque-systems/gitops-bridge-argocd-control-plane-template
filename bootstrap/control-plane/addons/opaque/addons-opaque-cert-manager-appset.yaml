@@ -61,7 +61,7 @@ spec:
               zerosslKeyId: "{{metadata.annotations.zerossl_key_id}}"
               email: "{{metadata.annotations.letsencrypt_email_address}}"
       destination:
-        namespace: '{{values.addonChart}}'
+        namespace: 'cert-manager'
         name: '{{name}}'
       syncPolicy:
         automated: {}
