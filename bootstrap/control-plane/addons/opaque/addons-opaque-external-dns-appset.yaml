@@ -61,7 +61,7 @@ spec:
                 subscriptionId: "{{metadata.annotations.subscription_id}}"
                 resourceGroup: "{{metadata.annotations.resource_group_name}}"
       destination:
-        namespace: 'kube-system'
+        namespace: 'external-dns'
         name: '{{name}}'
       syncPolicy:
         automated: {}
