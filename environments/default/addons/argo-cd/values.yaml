@@ -53,7 +53,6 @@ server:
   service:
     type: LoadBalancer
     annotations:
-      external-dns.alpha.kubernetes.io/target: edge-int.{{metadata.annotations.dns_domain}}
       service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 
 configs:
