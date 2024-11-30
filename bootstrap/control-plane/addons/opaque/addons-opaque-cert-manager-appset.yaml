@@ -58,7 +58,7 @@ spec:
             values: |
               domainName: "{{metadata.annotation.dns_domain}}"
               clusterIssuer: "opaque-cert-manager-zerossl"
-              zerosslKeyId: "{{metadata.annotation.zerossl_key_id}}"
+              zerosslKeyId: "foo"
               email: "{{metadata.annotation.letsencrypt_email_address}}"
       destination:
         namespace: '{{values.addonChart}}'
