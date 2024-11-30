@@ -12,16 +12,16 @@ spec:
         generators:
           - clusters:
               values:
-                addonChart: traefik
+                addonChart: opaque-traefik
                 # anything not staging or prod use this version
-                addonChartVersion: 28.3.0
-                addonChartRepository: https://traefik.github.io/charts
+                addonChartVersion: 0.1.0
+                addonChartRepository: ghcr.io/opaque-systems/helm-charts/opaque-traefik
               selector:
                 matchExpressions:
                   - key: akuity.io/argo-cd-cluster-name
                     operator: NotIn
                     values: [in-cluster]
-                  - key: enable_traefik
+                  - key: enable_opaque_traefik
                     operator: In
                     values: ['true']
           - clusters:
@@ -29,13 +29,13 @@ spec:
                 matchLabels:
                   environment: staging
               values:
-                addonChartVersion: 28.3.0
+                addonChartVersion: 0.1.0
           - clusters:
               selector:
                 matchLabels:
                   environment: prod
               values:
-                addonChartVersion: 28.3.0
+                addonChartVersion: 0.1.0
   template:
     metadata:
       name: addon-{{name}}-{{values.addonChart}}
